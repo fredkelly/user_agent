@@ -221,6 +221,15 @@ class UserAgent
 
     "#<#{self.class}: #{attributes_as_nice_string}>"
   end
+  
+  def attributes
+    attributes_as_hash = {}
+    AttributesForInspect.each do |name|
+      attributes_as_hash[name] = send(name)
+    end
+    attributes_as_hash
+  end
+  alias :to_hash :attributes
 
   def eql?(other)
     self.class.eql?(other.class) && source == other.source
